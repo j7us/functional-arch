@@ -1,0 +1,13 @@
+public static BoardState ProcessCascade(BoardState cs) {
+    List<Match> findedMatches = FindMatches(cs.Board);
+
+    if (findedMatches == null || findedMatches.Count == 0) {
+        return cs;
+    }
+
+    BoardState withRemovedMatches = RemoveMatches(cs, findedMatches);
+
+    BoardState bsWithFilledCells = FillEmptySpaces(withRemovedMatches);
+
+    return ProcessCascade(bsWithFilledCells);
+}
