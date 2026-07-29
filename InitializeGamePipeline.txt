@@ -1,0 +1,9 @@
+public static BoardState InitializeGame(int boardSize = 8)
+        {
+            var board = new Board(boardSize);
+            var boardState = new BoardState(board, 0)
+            var filled = FillEmptySpaces(boardState)
+            var process = ProcessCascade(filled)
+
+            return process;
+        }
