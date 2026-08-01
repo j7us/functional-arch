@@ -1,0 +1,19 @@
+public static BoardState ProcessCascade(BoardState currentState)
+        {
+            bool debugMode = true /* Получаем из конфига или аргументов */;
+            return FindMatches(currentState.Board).Count == 0
+                ? currentState
+                : CascadeUpdate(currentState)
+        }
+
+public static BoardState CascadeUpdate(BoardState currentState) {
+    return currentState
+                    .Pipe(bs =>
+                    {
+                        return RemoveMatches(bs, FindMatches(bs.Board));
+                    })
+                    .Draw(debugMode)
+                    .Pipe(FillEmptySpaces)
+                    .Draw(debugMode)
+                    .Pipe(CascadeUpdate);
+}
